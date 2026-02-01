@@ -1,0 +1,86 @@
+# Basics — Quick primer (10-minute read)
+
+This is a short, practical primer to get you started with risk registers and basic project-risk concepts. Read through this in ~10 minutes and then try the 2‑minute exercise at the end.
+
+Core terms (full form first)
+- RACI — Responsible, Accountable, Consulted, Informed  
+  - Responsible: person(s) who do the work.  
+  - Accountable: person who owns the outcome (only one).  
+  - Consulted: people who provide input (two-way).  
+  - Informed: people who are kept up to date (one-way).
+
+- RAID — Risks, Assumptions, Issues, Decisions  
+  - Risks: uncertain events that may affect objectives (with mitigation).  
+  - Assumptions: things the project team accepts as true for planning.  
+  - Issues: current problems that require action.  
+  - Decisions: formal choices made, with rationale and owner.
+
+- BIA — Business Impact Analysis  
+  - Analysis to identify and prioritise critical functions and the impact of their loss.
+
+- RTO — Recovery Time Objective  
+  - Maximum acceptable time to restore a service after an outage.
+
+- RPO — Recovery Point Objective  
+  - Maximum acceptable amount of data loss, measured in time.
+
+What is a risk? (short)
+- A risk is a possible future event that could affect your project's objectives (positive or negative). In this project we focus on negative risks (threats) that need mitigation.
+
+Likelihood vs Impact
+- Likelihood (1–5): How probable is the risk? 1 = Very unlikely, 5 = Very likely.  
+- Impact (1–5): If the risk occurs, how severe is the effect on objectives? 1 = Negligible, 5 = Severe.
+- Score = Likelihood × Impact (range 1–25). Use Score to prioritise.
+
+Priority bands (example)
+- 1–6: Low  
+- 7–12: Medium  
+- 13–18: High  
+- 19–25: Critical
+
+Residual risk
+- Residual risk = remaining risk after mitigation. Track both initial and residual Likelihood/Impact if you apply mitigations.
+
+Minimum columns for a risk register (use as CSV)
+- ID, Title, Description, Category, Likelihood (1-5), Impact (1-5), Score (LxI), Priority, Owner, Mitigation, Status, DateIdentified, Notes
+
+Example row
+ID,Title,Description,Category,Likelihood (1-5),Impact (1-5),Score (LxI),Priority,Owner,Mitigation,Status,DateIdentified,Notes  
+1,Payment gateway outage,Third‑party payment provider downtime,Third‑party,4,5,20,Critical,Ops Lead,"Add retry logic; configure alternate gateway",Open,2026-01-31,Simulated example
+
+Simple scoring logic (do this in a cell or script)
+- Score = Likelihood * Impact  
+- Priority = map Score to band above (Low/Medium/High/Critical)  
+- Optionally compute ResidualScore if you reduce Likelihood/Impact after mitigations
+
+Quick visual idea (heatmap)
+- Create a 5×5 grid with Impact on X and Likelihood on Y. Cell color = number of risks or average Score. Use conditional formatting (Sheets/Excel) or matrix visual (Power BI).
+
+RAID vs. Risk register
+- Keep a single RAID log when convenient and use the Type column to filter (Risk / Assumption / Issue / Decision). For interview / portfolio, show a sample RAID export and a filtered Risk register.
+
+10-minute learning & do-along script
+1. (2 min) Read the Core terms and What is a risk? sections above. Make sure you know RACI and RAID full forms.
+2. (3 min) Open the sample risk-register.csv in the repo (artifacts/risk-register.csv). Scan the column names and the 5 example rows.
+3. (3 min) Walk through scoring: pick Risk ID 1 (Payment gateway outage). Multiply Likelihood 4 × Impact 5 = Score 20 → Priority = Critical. Note the Owner and Mitigation.
+4. (2 min) Add one risk of your own for the simulated e‑commerce: write one row and save it locally (example idea: "Promo code bug letting discounts exceed 100%").
+
+Small exercise (2 minutes)
+- Add a single new row to artifacts/risk-register.csv with your own risk (title, 1–2 sentence description, Likelihood 1–5, Impact 1–5, compute Score, pick Owner = You). Commit this as your Day 2 practice if you like.
+
+Short learning resources (quick)
+- [Risk register — Wikipedia](https://en.wikipedia.org/wiki/Risk_register) — concise overview of the concept.  
+- [Responsibility assignment matrix — Wikipedia (RACI)](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix) — quick RACI intro.  
+- Search YouTube for: "risk register explained", "what is a risk register", or "RACI matrix explained" — pick a 5–10 minute video that suits your language and pace.
+
+Tips for beginners
+- Keep entries simple and concrete — 1–2 sentences. Recruiters prefer clarity over jargon.  
+- Focus on ownership: always assign an Owner even if it's "You (Project Lead)".  
+- Track Status: Open / In Progress / Mitigated / Closed. This shows progress.  
+- Commit early and often — daily commits are great for your Day1-30 project.
+
+What's next (after this 10-minute read)
+- Use the 2-minute exercise to add one risk to artifacts/risk-register.csv. That will be an easy Day 2 activity if you prefer to split identification across two days.
+- Tomorrow (Day 2) we will expand the risk list and add a short one-page "how scoring works" description you can publish.
+
+If you want, I can generate the exact one-row CSV line you should add for Day 2 (give me one scenario to use or say "simulate" and I'll pick one).
