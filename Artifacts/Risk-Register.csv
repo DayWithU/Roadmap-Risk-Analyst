@@ -4,3 +4,4 @@ ID,Title,Description,Category,Likelihood (1-5),Impact (1-5),Score (LxI),Priority
 3,Credit card fraud,Increased chargebacks,Security,3,5,15,High,Security Lead,"Add monitoring, 3DS",Open,2026-01-31,
 4,Shipping delays,Carrier delays during peak season,Supplier,2,4,8,Medium,Logistics Lead,"Add buffer qty and stronger SLAs",Open,2026-01-31,
 5,Regulatory change,New tax rule impacts checkout,Compliance,2,5,10,Medium,Legal,"Monitor regulation and update checkout",Open,2026-01-31,
+6,Promotions/discount bug,Promo codes stack and exceed intended discount,Business Rule,2,4,8,Medium,You (Project Lead),"Validate promo logic; add unit tests and limits",Open,2026-02-02,"Added Day 2 - example risk"
