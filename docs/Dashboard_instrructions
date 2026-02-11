@@ -1,0 +1,84 @@
+# Day 8 — Dashboard instructions (Google Sheets)
+
+Goal
+Create a simple dashboard (cards + top 5 table + trend chart) from artifacts/risk-register.csv using Google Sheets. Export the dashboard area as an image to dashboards/dashboard.png.
+
+Preparation
+- Ensure artifacts/risk-register.csv is up-to-date in your repo and that DateIdentified is formatted as YYYY-MM-DD (or recognizable date).
+- Open Google Sheets → File → Import → Upload → select artifacts/risk-register.csv and Import into a new sheet (or copy data into an existing sheet).
+
+Sheet layout suggestion
+- Sheet1 (raw): paste CSV here (keep headers).
+- Sheet2 (dashboard): build dashboard visuals and cards.
+
+Formulas & steps (paste exactly; adjust sheet names if different)
+
+1) Create a dashboard sheet
+- Add a new tab named `Dashboard`.
+
+2) Cards: counts by Priority
+- On `Dashboard` cell B2 put header "Critical"
+- In B3 (value for Critical) paste:
+  `=COUNTIF(Raw!H:H, "Critical")`
+- In C2 put "High"; in C3:
+  `=COUNTIF(Raw!H:H, "High")`
+- In D2 put "Medium"; in D3:
+  `=COUNTIF(Raw!H:H, "Medium")`
+- In E2 put "Low"; in E3:
+  `=COUNTIF(Raw!H:H, "Low")`
+- (Adjust `Raw!H:H` if your Priority column is in a different column; H is the example where Priority sits.)
+
+3) Top 5 risks table (Title, Score, Priority, Owner)
+- In `Dashboard` cell A6 add header "Top 5 Risks"
+- In A7 (formula area) paste (this uses SORT and FILTER):
+  `=ARRAY_CONSTRAIN(SORT({Raw!B2:B, Raw!G2:G, Raw!H2:H, Raw!I2:I}, 2, FALSE), 5, 4)`
+  - Explanation:
+    - `{Raw!B2:B, Raw!G2:G, Raw!H2:H, Raw!I2:I}` constructs a 4-col array: Title, Score, Priority, Owner
+    - `SORT(..., 2, FALSE)` sorts by column 2 (Score) descending
+    - `ARRAY_CONSTRAIN(...,5,4)` returns top 5 rows and 4 columns
+  - If your Score or Owner are in different columns, update references accordingly.
+
+4) Trend chart: New risks over time
+- Create a small pivot table or use formula to bucket counts by DateIdentified:
+  - In `Dashboard` choose cells A13:B (labels), put header "Date" in A13 and "New Risks" in B13.
+  - In A14 paste unique sorted dates:
+    `=SORT(UNIQUE(FILTER(Raw!L2:L, Raw!L2:L<>"")),1,TRUE)`
+    - Assumes DateIdentified is in column L; change if different.
+  - In B14 paste formula to count per date (fill down):
+    `=IF(A14="","",COUNTIFS(Raw!L:L, A14))`
+- Select the Date / New Risks range and Insert → Chart → Chart type: Line chart or Column chart. Adjust axis title to "Date" and "New risks".
+
+5) Formatting & visual polish
+- Make cards (B2:E3) bold, larger font, and fill with light color. Add small labels above numbers.
+- Add a chart title and top-5 header.
+- Optionally add a filter dropdown (Data → Create a Filter view) so you can view by Category or Owner.
+
+6) Export dashboard image
+- Select the Dashboard area (cards + top 5 + chart).
+- File → Download → PNG image (.png) OR use the three-dots menu on the chart to download PNG for the chart, and take a screenshot for the whole area.
+- Save image to local repo path `dashboards/dashboard.png`.
+
+Notes about column letters
+- This doc assumed the raw sheet columns map like this:
+  - A: ID
+  - B: Title
+  - C: Description
+  - D: Category
+  - E: Likelihood (1-5)
+  - F: Impact (1-5)
+  - G: Score (LxI)
+  - H: Priority
+  - I: Owner
+  - J: Mitigation
+  - K: Status
+  - L: DateIdentified
+  - M: Notes
+- If your sheet has different column positions, replace `Raw!B2:B` etc. with the correct columns.
+
+Quick checks
+- After import, ensure Score is numeric (not text). Use VALUE() to coerce if required.
+- Ensure DateIdentified is a date; use DATEVALUE() or reformat column.
+
+What to commit
+- dashboards/dashboard.png (the exported image)
+- docs/dashboard_instructions.md (this file)
