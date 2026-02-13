@@ -1,0 +1,61 @@
+# Tabletop exercise — Payment Gateway Outage (Day 11)
+
+Objective
+Run a 30–45 minute tabletop simulation to validate roles, communications, and decisions for a Payment Gateway outage scenario. Produce minutes, action items, and an updated risk register note.
+
+Scenario (short)
+At 10:00 UTC the primary payment gateway (Gateway A) begins returning intermittent timeouts and 502 errors for checkout calls. Customer payment failures spike to 8% and abandoned checkout increases. The outage may be partial or escalate to full downtime.
+
+Scope
+- Simulate detection → escalation → mitigation decision (failover to Gateway B or other mitigations) → communication plan.
+- Focus on decision-making and responsibilities, not technical implementation.
+
+Participants / roles (use these or map to real people)
+- Project Lead (You): facilitator & scribe
+- Ops Lead: executes operational actions (routing, monitoring)
+- Dev Lead: implements config changes or toggles
+- QA Lead: validates test transactions and monitors outcomes
+- Support Lead: external-facing comms & customer handling
+- Security/Legal (optional): regulatory or fraud concerns
+- Executive / Sponsor (optional): approves go/no‑go for production changes
+
+Agenda (30–45 minutes)
+1. Context (5 min)
+   - Read the scenario and confirm the scope & objectives.
+
+2. Detection & initial triage (5–8 min)
+   - How do we detect this? (alerts, monitoring, customer reports)
+   - Who is notified? (alert routing / on-call)
+
+3. Options & initial decisions (8–12 min)
+   - What immediate mitigations are possible? (retry logic, queueing, circuit breaker, feature flag to redirect)
+   - Is failover to Gateway B considered now or only if certain thresholds hit?
+   - Who approves failover? (Accountable person / Executive)
+
+4. Communication (5–8 min)
+   - What do we tell customers and internal stakeholders?
+   - Support scripts and social media guidance.
+
+5. Escalation & follow-ups (5 min)
+   - Actions to implement, owners, deadlines.
+   - Decide on testing/PoC schedule (if not done now) and monitoring changes.
+
+6. Close (2 min)
+   - Confirm action items and who will update artifacts (risk register, mitigation tasks).
+
+Injects (use during exercise to prompt decisions)
+- Inject 1 (after Detection): "Payment failures up from 0.8% to 8% in 10 minutes; error logs show timeouts."
+- Inject 2 (after Options): "Alternate gateway responds but with 20% higher latency; some test transactions time out."
+- Inject 3 (after Comm): "A customer tweets about failed payment; support sees 15% increase in tickets."
+
+Deliverables (after tabletop)
+- docs/tabletop_minutes.md (detailed minutes)
+- templates/tabletop_actions.csv (action items with owner and due date)
+- Update artifacts/risk-register.csv entry for ID 1: add a short summary note and set Status as In Progress or Scheduled
+
+Tips
+- If running solo, play each role briefly and be explicit in the minutes about the role’s decisions.
+- Timebox each agenda item to keep within 45 minutes.
+- Record or timestamp the minutes so you can reference decisions later.
+
+Use this tabletop to test communication and decision flow — it’s powerful evidence of process and stakeholder coordination for interviews.
